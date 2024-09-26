@@ -3,7 +3,6 @@ import openpyxl
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, Border, Side
 
-# Directories and their specific configurations
 directories = {
     r"C:\Reports\Monthly\IMER": 8,
     r"C:\Reports\Monthly\MDS": 9,
@@ -17,7 +16,6 @@ directories = {
     r"C:\Reports\Semi-annual\PEPFAR_MER_SEMI_ANNUAL": 8
 }
 
-# Sheets to ignore for specific directories
 ignore_sheets = {
     r"C:\Reports\Monthly\PEPFAR_MER_QUARTERLY_MONTHLY": ["PrEP Extra Dissag"],
     r"C:\Reports\Monthly\PEPFAR_MER_SEMI_ANNUAL_MONTHLY": ["TX_TB"],
@@ -79,7 +77,7 @@ def merge_files(directory, start_row, ignore_sheets, output_file):
     for filename in os.listdir(directory):
         file_path = os.path.join(directory, filename)
         if file_path.endswith('.xlsx'):
-            print(f"Processing file: {file_path}")  # Debugging info
+            print(f"Processing file: {file_path}") 
             wb = openpyxl.load_workbook(file_path, data_only=False)
             remove_specific_sheet(directory, wb, "RM de DAH - vertical")
             if first_file:
@@ -88,7 +86,7 @@ def merge_files(directory, start_row, ignore_sheets, output_file):
             else:
                 for sheet_name in wb.sheetnames:
                     if sheet_name in ignore_sheets:
-                        print(f"Ignoring sheet: {sheet_name}")  # Debugging info
+                        print(f"Ignoring sheet: {sheet_name}") 
                         continue
                     ws_src = wb[sheet_name]
                     if sheet_name in wb_output.sheetnames:
